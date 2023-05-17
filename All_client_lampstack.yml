@@ -50,7 +50,7 @@
 
     - name: Set up virtuahHost
       template:
-        src: "/home/ansible/apache-template"
+        src: "/home/ansible/apache-template.conf"
         dest: "/etc/apache2/sites-available/{{ http_conf }}"
         owner: www-data
         group: www-data
