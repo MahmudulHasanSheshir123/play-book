@@ -67,7 +67,7 @@
       when: ansible_os_family == "Debian"
  
     - name: Enable site
-      template: 
+      file: 
         src: "/home/ansible/nginx.conf"
         dest: "/etc/nginx/sites-enabled/default"
         owner: www-data
