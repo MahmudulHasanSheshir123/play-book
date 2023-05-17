@@ -6,7 +6,7 @@ events {
 http{
 	server {
        		listen 8086;
-       		server_name uclient.localdomain;
+       		server_name 192.168.20.230;
        		index index.html index.htm;
        		root /var/www/html/uclient.lcoaldomain/;
 		}
