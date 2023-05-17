@@ -52,6 +52,9 @@
       template:
         src: "/home/ansible/apache-template"
         dest: "/etc/apache2/sites-available/{{ http_conf }}"
+        owner: www-data
+        group: www-data
+        mode: '0755'
       when: ansible_os_family == "Debian"
     
     - name: Set up virtuahHost for nginx
