@@ -80,7 +80,7 @@
     - name: "UFW firewall allow HTTP on port {{ http_port }}"
       ufw:
         rule: allow
-        port: 8086
+        port: 8080
         proto: tcp
       when: ansible_os_family == "Debian"
     
