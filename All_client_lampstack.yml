@@ -50,13 +50,13 @@
 
     - name: Set up virtuahHost
       template:
-        src: "/home/ansible/apache-template.conf"
+        src: "/home/ansible/apache-template"
         dest: "/etc/apache2/sites-available/{{ http_conf }}"
       when: ansible_os_family == "Debian"
     
     - name: Set up virtuahHost for nginx
       template:
-        src: "/home/ansible/nginx.conf.tpl"
+        src: "/home/ansible/nginx.conf"
         dest: "/etc/nginx/sites-available/{{ http_conf }}"
         owner: www-data
         group: www-data
@@ -65,8 +65,8 @@
  
     - name: Enable site
       template: 
-        src: "/home/ansible/nginx.conf.tpl"
-        dest: "/etc/nginx/sites-enabled/{{ http_conf }}"
+        src: "/home/ansible/nginx.conf"
+        dest: "/etc/nginx/sites-enabled/default"
         owner: www-data
         group: www-data
         mode: '0755'
@@ -82,7 +82,7 @@
     
     - name: Setup nginx conf
       template:
-        src=nginx.conf.tpl
+        src=nginx.conf
         dest=/etc/nginx/nginx.conf
       notify: restart nginx
       when: ansible_os_family == "Debian"
