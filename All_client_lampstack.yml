@@ -53,10 +53,18 @@
         src: "/home/ansible/apache-template.conf"
         dest: "/etc/apache2/sites-available/{{ http_conf }}"
       when: ansible_os_family == "Debian"
+    
+    - name: Set up virtuahHost for nginx
+      template:
+        src: "/home/ansible/nginx.conf.tpl"
+        dest: "/etc/nginx/sites-available/{{ http_conf }}"
+      when: ansible_os_family == "Debian"
  
     - name: Enable site
-      command: a2ensite {{ http_conf }}
-      when: ansible_os_family == "Debian"
+      template: 
+        src: "/home/ansible/nginx.conf.tpl"
+        dest: "/etc/nginx/sites-enabled/{{ http_conf }}"
+        when: ansible_os_family == "Debian"
  
     - name: "UFW firewall allow HTTP on port {{ http_port }}"
       ufw:
