@@ -41,7 +41,7 @@
         group: www-data
         mode: '0755'
       when: ansible_os_family == "Debian"
-
+  
     - name: Copy your index file
       template:
         src: "/home/ansible/index-template.html"
@@ -64,6 +64,14 @@
         rule: allow
         port: "{{ http_port }}"
         proto: tcp
+      when: ansible_os_family == "Debian"
+    
+    
+    - name: Setup nginx conf
+      template:
+        src=nginx.conf.tpl
+        dest=/etc/nginx/nginx.conf
+      notify: restart nginx
       when: ansible_os_family == "Debian"
  
      
@@ -105,6 +113,7 @@
         name: mysql
         state: started
         enabled: yes
+      notify: Restart MySQL service
       when: ansible_os_family == "Debian"
 
 
@@ -150,9 +159,13 @@
       service:
         name: apache2
         state: restarted
-      when: ansible_os_family == "Debian"
+      
     - name: Restart MySQL service
       service:
         name: mysql
         state: restarted
-      when: ansible_os_family == "Debian"
+            
+    - name: restart nginx
+      service:
+        name=nginx
+        state=restarted
