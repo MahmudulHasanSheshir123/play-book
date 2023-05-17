@@ -74,7 +74,6 @@
         owner: www-data
         group: www-data
         mode: '0755'
-        state: link
       notify: restart nginx
       when: ansible_os_family == "Debian"
  
