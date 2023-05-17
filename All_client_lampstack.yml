@@ -64,6 +64,7 @@
         owner: www-data
         group: www-data
         mode: '0755'
+      notify: restart nginx
       when: ansible_os_family == "Debian"
  
     - name: Enable site
@@ -73,6 +74,8 @@
         owner: www-data
         group: www-data
         mode: '0755'
+        state: link
+      notify: restart nginx
       when: ansible_os_family == "Debian"
  
     - name: "UFW firewall allow HTTP on port {{ http_port }}"
